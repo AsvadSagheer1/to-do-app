@@ -3,10 +3,10 @@ export default function Button({
     onClick,
     children,
     isDisabled,
-    btnSm,
+    btnClass,
     id
 }) {
     return (
-        <button style={{ backgroundColor: "#A879E2" }} id={id} className={`${isDisabled} ${btnSm} btn text-white fw-bolder`} onClick={() => onClick()}>{children}</button >
+        <button style={{ backgroundColor: "#A879E2" }} id={id} className={`${isDisabled} ${btnClass} btn text-white fw-bolder`} onClick={() => onClick()}>{children}</button >
     )
 }

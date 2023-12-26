@@ -31,6 +31,10 @@ function App() {
     }
   }
 
+  const deleteAll = () => {
+    setTodos([])
+  }
+
   const handleDelete = (index) => {
     const temp = [...todos]
     temp.splice(index, 1)
@@ -52,7 +56,9 @@ function App() {
   }
 
   useEffect(() => {
-    if (todos.length > 0) localStorage.setItem("allTodos", JSON.stringify(todos))
+    setTimeout(() => {
+      localStorage.setItem("allTodos", JSON.stringify(todos));
+    }, 50);
   }, [todos])
 
   useEffect(() => {
@@ -79,13 +85,16 @@ function App() {
             {isEdit ? "Edit Todo" : "Add Todo"}
           </Button>
         </div>
+        <Button btnClass="mx-2 my-2" onClick={deleteAll}>
+          Remove All Todos
+        </Button>
         {todos.map((item, i) =>
           <>
             <br />
             <Input style={{ height: "22px", width: "22px" }} className="form-check-input my-2 mx-2" type="checkbox" value={item.markDone} isChecked={item.markDone ? "checked" : null} isDisabled={item.markDone ? "disabled" : null} onClick={() => handleMarkDone(i)} />
             <p className={item.markDone ? "text-decoration-line-through" : ""} style={{ display: "inline-block", minWidth: "200px", maxWidth: "200px" }} key={i}>{item.name}</p>
-            <Button btnSm="btn-sm mx-2 my-2" onClick={() => handleDelete(i)}><FontAwesomeIcon icon={faTrash} /></Button>
-            <Button btnSm="btn-sm mx-2 my-2" isDisabled={item.markDone ? "disabled" : ""} onClick={() => handleEdit(i)}><FontAwesomeIcon icon={faPenToSquare} /></Button>
+            <Button btnClass="btn-sm mx-2 my-2" onClick={() => handleDelete(i)}><FontAwesomeIcon icon={faTrash} /></Button>
+            <Button btnClass="btn-sm mx-2 my-2" isDisabled={item.markDone ? "disabled" : ""} onClick={() => handleEdit(i)}><FontAwesomeIcon icon={faPenToSquare} /></Button>
           </>
         )
         }
